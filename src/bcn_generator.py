@@ -16,7 +16,6 @@ class BCN:
 BIRTHCODETHRESHOLD = 1954
 
 class Generator:
-    
     @staticmethod
     def randomBcn(min:int=0,max:int=99) -> BCN:
         raise NotImplementedError
@@ -32,12 +31,13 @@ class Generator:
     @staticmethod
     def generateBCN(date_of_birth:date, gender:Gender) -> BCN:
         """
-        Generate random birth code.
+        Generate a Czech birth certificate number from the given arguments.
         @param dateOfBirth [datetime.date]: date of the birth
-        @param gender [str]: M - male, F - female
-        @return [str]: generated birth code
+        @param gender [Gender]: M - male, F - female
+        @return [BCN]: generated birth certificate number
         """
-        raise NotImplementedError
+        Generator._typeValidation(date_of_birth,date);Generator._typeValidation(gender,Gender)
+
         birth_code = ""
         year = str(date_of_birth.year)[-2:]
         month = str(date_of_birth.month).zfill(2)
@@ -59,7 +59,14 @@ class Generator:
 
     @staticmethod
     def _typeValidation(variable,expected) -> None:
-        raise NotImplementedError
+        """
+        Just check data type of the given variable.
+        :param variable [any]: variable for data type check
+        :param expected [any]: expected data type
+        :return: None
+        """
+        if not isinstance(variable,expected):
+            raise TypeError(f"Expected data type '{expected}', but it has been given '{type(variable)}'")
         
 
 
