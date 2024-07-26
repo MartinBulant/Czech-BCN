@@ -18,6 +18,7 @@ class Validator:
         :param bcn [str]: birth certificate number (BCN)
         :return [bool]: True = valid characters, False otherwise. 
         """
+        if not Validator.validateLength(bcn): return False
         return re.search("\D",bcn) is None
 
     @staticmethod
