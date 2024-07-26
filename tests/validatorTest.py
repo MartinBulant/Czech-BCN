@@ -74,13 +74,13 @@ class TestValidator(unittest.TestCase):
         self.assertFalse(Validator.validateCharacters(bcn))
     
     def test_validateBirthDate_date_invalid(self) -> None:
-        bcn = 
+        raise NotImplementedError
 
     def test_validateBirthDate_month_invalid(self) -> None:
-        pass
+        raise NotImplementedError
 
     def test_validateBirthDate_year_invalid(self) -> None:
-        pass
+        raise NotImplementedError
 
     
 
