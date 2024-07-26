@@ -1,4 +1,5 @@
 import re
+import datetime
 
 class Validator:
 
@@ -28,12 +29,35 @@ class Validator:
         :param bcn [str]: birth certificate number
         :return [bool]: True = valid, False otherwise.
         """
+        def yearDecoding(year:int,endingLen:int) -> int:
+            if (endingLen==3) and (year > 53):
+                return year + 1800
+            elif ((endingLen==3) and (year <= 53)) or ((endingLen==4) and (year > 53)):
+                return year + 1900
+            elif (endingLen==4) and (year <= 53):
+                return year + 2000
+            else:
+                raise AttributeError
+
         if not Validator.validateLength(bcn):
             return False
         day = int(bcn[0:2])
         month = int(bcn[2:4])
         year = int(bcn[4:6])
-        return  (0 <=year<=99) and( 1<=(month)<=12 or 51<=(month)<=62) and(1<=day<=31)
+        if not ((0 <=year<=99) and (1<=(month)<=12 or 51<=(month)<=62) and (1<=day<=31)):
+            return False
+        
+        if month > 50:
+            month -= 50
+
+        endingLen = int(bcn[6:-1])
+        year = yearDecoding(year,endingLen) 
+        try:
+            datetime.date(year,month,day)
+        except ValueError:
+            return False
+        else:
+            return True
 
     @staticmethod
     def validateBCN(bcn:str) -> bool:
@@ -51,4 +75,7 @@ class Validator:
         
 
 if __name__ == "__main__":
-    pass
+    a = str(760620)
+    datetime.date(2024,7,32)
+
+    
