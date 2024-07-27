@@ -75,7 +75,5 @@ class Validator:
         
 
 if __name__ == "__main__":
-    a = str(760620)
-    datetime.date(2024,7,32)
-
+    pass
     
