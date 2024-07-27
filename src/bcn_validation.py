@@ -9,6 +9,7 @@ class Validator:
         :param bcn [str]: birth certificate number (BCN)
         :return [bool]: True = valid length, False otherwise.
         """
+        Validator._typeValidation(bcn,str)
         return  9<=len(bcn)<=10
 
     @staticmethod
@@ -18,6 +19,7 @@ class Validator:
         :param bcn [str]: birth certificate number (BCN)
         :return [bool]: True = valid characters, False otherwise. 
         """
+        Validator._typeValidation(bcn,str)
         return re.search("\D",bcn) is None
 
     @staticmethod
@@ -27,6 +29,7 @@ class Validator:
         :param bcn [str]: birth certificate number
         :return [bool]: True = valid, False otherwise.
         """
+        Validator._typeValidation(bcn,str)
         if not Validator.validateLength(bcn):
             return False
         day = int(bcn[0:2])
@@ -41,6 +44,7 @@ class Validator:
         :param bcn [str]: birth certificate number
         :return: True - valid, False otherwise.
         """
+        Validator._typeValidation(bcn,str)
         if not Validator.validateLength(bcn): return False
         if not Validator.validateCharacters(bcn): return False
         if not Validator.validateBirthDate(bcn): return False
@@ -48,6 +52,16 @@ class Validator:
             return True
         return int(bcn[0:-1])%11==0
         
-
+    @staticmethod
+    def _typeValidation(variable,expected) -> None:
+        """
+        Just check data type of the given variable.
+        :param variable [any]: variable for data type check
+        :param expected [any]: expected data type
+        :return: None
+        """
+        if not isinstance(variable,expected):
+            raise TypeError(f"Expected data type '{expected}', but it has been given '{type(variable)}'")
+        
 if __name__ == "__main__":
     pass
