@@ -125,7 +125,8 @@ class TestValidator(unittest.TestCase):
     def test_validateBirthDate_month_invalid(self) -> None:
         self.assertFalse(Validator.validateBirthDate("6157090704"))
 
-    def test_validBCN(self)
+    def test_validBCN(self) -> None:
+        raise NotImplementedError("TODO")
 
     def _checkStr(self,function) -> None:
         self.assertFalse(function("A"))

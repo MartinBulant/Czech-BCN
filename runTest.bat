@@ -1,7 +1,7 @@
 @echo off
 
 echo  Test - Runnig 
-python -m unittest discover -s tests .
+python -m unittest
 
 IF %ERRORLEVEL% EQU 0 (
     echo Test - Done
