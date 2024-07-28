@@ -4,8 +4,8 @@ import string
 import os
 from src.validator import Validator
 
-BIRTHNUMBERS_FEMALE_VALID = "./bins/birthnumbers_Female_valid.txt" 
-BIRTHNUMBERS_MALE_VALID =  "./bins/birthnumbers_Male_valid.txt"
+BIRTHNUMBERS_FEMALE_VALID = "bins/birthnumbers_Female_valid.txt" 
+BIRTHNUMBERS_MALE_VALID =  "bins/birthnumbers_Male_valid.txt"
 
 
 
@@ -117,16 +117,31 @@ class TestValidator(unittest.TestCase):
         self.assertFalse(Validator.validateCharacters(bcn))
     
     def test_validateBirthDate_valid(self) -> None:
-        self.assertFalse(Validator.validateBirthDate("6107090704"))
+        self.assertTrue(Validator.validateBirthDate("6107090704"))
     
     def test_validateBirthDate_date_invalid(self) -> None:
-        self.assertFalse(Validator.validateBirthDate("6107500704"))
+        self.assertFalse(Validator.validateBirthDate("6107400704"))
 
     def test_validateBirthDate_month_invalid(self) -> None:
-        self.assertFalse(Validator.validateBirthDate("6157090704"))
+        self.assertFalse(Validator.validateBirthDate("6165090704"))
 
-    def test_validBCN(self) -> None:
-        raise NotImplementedError("TODO")
+    def test_validBCN_male_valid(self) -> None:
+        path = os.path.join(os.path.dirname(__file__),BIRTHNUMBERS_MALE_VALID)
+        for bcn in self._loadTestData(path):
+            with self.subTest(f"bcn: {bcn}"):
+                self.assertTrue(Validator.validateBCN(bcn))
+
+    def test_validBCN_female_valid(self) -> None:
+        path = os.path.join(os.path.dirname(__file__),BIRTHNUMBERS_FEMALE_VALID)
+        for bcn in self._loadTestData(path):
+            with self.subTest(f"bcn: {bcn}"):
+                self.assertTrue(Validator.validateBCN(bcn))
+
+    def test_validBCN_female_invalid(self) -> None:
+        self.assertFalse(Validator.validateBCN("6452211833"))
+    
+    def test_validBCN_male_invalid(self) -> None:
+        self.assertFalse(Validator.validateBCN("8803022805"))
 
     def _checkStr(self,function) -> None:
         self.assertFalse(function("A"))
@@ -141,9 +156,9 @@ class TestValidator(unittest.TestCase):
     
     def _loadTestData(self,path:str) -> list:
         if not os.path.isfile(path):
-            raise AttributeError("File in the given path does not exist.")
+            raise AttributeError(f"File in the given path does not exist. Given path '{path}'")
         
-        with open("tests/bins/birthnumbers_Male.txt", "r") as file:
+        with open(path, "r") as file:
             bcns = file.read().splitlines()
 
         return bcns
