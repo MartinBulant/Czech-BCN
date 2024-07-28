@@ -44,16 +44,17 @@ class Validator:
         Validator._typeValidation(bcn,str)
         if not Validator.validateLength(bcn):
             return False
-        day = int(bcn[0:2])
+        
+        year = int(bcn[0:2])
         month = int(bcn[2:4])
-        year = int(bcn[4:6])
+        day = int(bcn[4:6])
         if not ((0 <=year<=99) and (1<=(month)<=12 or 51<=(month)<=62) and (1<=day<=31)):
             return False
         
         if month > 50:
             month -= 50
 
-        endingLen = int(bcn[6:-1])
+        endingLen = len(bcn[6:])
         year = yearDecoding(year,endingLen) 
         try:
             datetime.date(year,month,day)
@@ -75,7 +76,7 @@ class Validator:
         if not Validator.validateBirthDate(bcn): return False
         if len(bcn) == 9:
             return True
-        return int(bcn)%11==0
+        return (int(bcn)%11==0)
     
     @staticmethod
     def _typeValidation(variable,expected) -> None:
