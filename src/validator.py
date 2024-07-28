@@ -75,7 +75,7 @@ class Validator:
         if not Validator.validateBirthDate(bcn): return False
         if len(bcn) == 9:
             return True
-        return int(bcn[0:-1])%11==0
+        return int(bcn)%11==0
     
     @staticmethod
     def _typeValidation(variable,expected) -> None:
