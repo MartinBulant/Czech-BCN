@@ -1,6 +1,6 @@
 name: Python test action
 on: 
-  pull_request:
+  push:
     branches:
       - main 
   
@@ -23,11 +23,6 @@ jobs:
         shell: cmd
         run: python -m unittest -v test.test_validator
 
-      - name: Force fail for testing
-        run: |
-          echo "This step will fail"
-          exit 1
-
   ubuntu-test:
     runs-on: ubuntu-latest
     steps:
@@ -41,8 +36,3 @@ jobs:
       
       - name: Test Validator
         run: python -m unittest -v test.test_validator  
-
-      - name: Force fail for testing
-        run: |
-          echo "This step will fail"
-          exit 1
