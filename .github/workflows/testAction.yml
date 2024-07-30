@@ -1,5 +1,9 @@
 name: Python test action
-on: [push]
+on: 
+  push:
+    branches:
+      - main
+
 jobs:
   ubuntu-test:
     runs-on: windows-latest
