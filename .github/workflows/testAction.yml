@@ -22,7 +22,6 @@ jobs:
         run: python -m unittest -v test.test_validator
 
   ubuntu-test:
-    needs: windows-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
