@@ -20,9 +20,11 @@ IF %ERRORLEVEL% EQU 0 (
 
 exit /b 0
 :classicMode
-    python -m unittest
+    python -m unittest test.test_validator
+    python -m unittest test.test_generator
     exit /b 0
 
 :verboseMode
-    python -m unittest -v
+    python -m unittest -v test.test_validator
+    python -m unittest -v test.test_generator
     exit /b 0
