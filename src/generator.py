@@ -79,13 +79,27 @@ class Generator:
         birth_code += year
         birth_code += month
         birth_code += day
-        control_code = "".join(str(random.randint(0, 9)) for _ in range(0, 3)) 
-
-        birth_code = str(birth_code) + control_code
-
+        
         if int(birthDate.year) < BIRTHCODETHRESHOLD:
-            return BCN(birth_code,birthDate,gender)
-        return BCN(birth_code + str((int(birth_code) % 11)),birthDate,gender)
+            control_code = "".join(str(random.randint(0, 9)) for _ in range(0, 3)) 
+            return BCN(birth_code + control_code,birthDate,gender)
+        
+        control_code = "".join(str(random.randint(0, 9)) for _ in range(0, 2)) 
+        birth_code = str(birth_code) + control_code
+        
+        odd = sum(int(birth_code[i]) for i in range(0,8,2))
+        even = sum(int(birth_code[i]) for i in range(1,8,2))
+        
+        difference = odd - even
+        lastDigits = []
+        for i in range(9):
+            for j in range(9):
+                if (difference + (i-j))%11==0:
+                    lastDigits.append(str(i)+str(j))        
+
+        control_code = random.choice(lastDigits)
+        return BCN(birth_code + control_code,birthDate,gender)
+
 
     @staticmethod
     def _generateRandomDate(delta:int) -> date:
