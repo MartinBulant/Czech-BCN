@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "CzechBcn"
+version = "1.0.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+  {name = "Martin Bulant", email = "Martin.Bulant@seznam.cz"}
+]
+
+dependencies = [
+
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
