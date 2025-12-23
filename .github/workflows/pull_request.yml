@@ -27,4 +27,4 @@ jobs:
             pip install dist/*.whl
 
         - name: Test Validator
-          run: pytest .\test\
+          run: python -m pytest test
