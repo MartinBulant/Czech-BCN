@@ -24,7 +24,7 @@ jobs:
           run: |
             pip install build
             python -m build
-            pip install dist/*.whl
+            python -m pip install .
 
         - name: Test Validator
           run: python -m pytest test
